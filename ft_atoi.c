@@ -1,25 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   s_func.c                                           :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tatev <tatev@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/04 15:20:36 by afaghaja          #+#    #+#             */
-/*   Updated: 2026/03/06 16:08:08 by tatev            ###   ########.fr       */
+/*   Created: 2026/01/29 22:20:57 by afaghaja          #+#    #+#             */
+/*   Updated: 2026/03/06 16:47:15 by tatev            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	s_func(t_list **a)
+int	ft_atoi(const char *nptr)
 {
-	t_list	*temp;
+	int	i;
+	int	res;
+	int	sign;
 
-	if (!a || !(*a) || !(*a)->next)
-		return ;
-	temp = *a;
-	*a = (*a)->next;
-	temp->next = (*a)->next;
-	(*a)->next = temp;
+	i = 0;
+	res = 0;
+	sign = 1;
+	while ((nptr[i] >= 9 && nptr[i] <= 13) || nptr[i] == 32)
+		i++;
+	if (nptr[i] == '-' || nptr[i] == '+')
+	{
+		if (nptr[i] == '-')
+			sign = -1;
+		i++;
+	}
+	while (nptr[i] >= '0' && nptr[i] <= '9')
+	{
+		res = (res * 10) + (nptr[i] - '0');
+		i++;
+	}
+	return (res * sign);
 }

@@ -1,25 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   s_func.c                                           :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tatev <tatev@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/04 15:20:36 by afaghaja          #+#    #+#             */
-/*   Updated: 2026/03/06 16:08:08 by tatev            ###   ########.fr       */
+/*   Created: 2026/01/30 15:09:40 by afaghaja          #+#    #+#             */
+/*   Updated: 2026/03/07 16:40:24 by tatev            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	s_func(t_list **a)
-{
-	t_list	*temp;
 
-	if (!a || !(*a) || !(*a)->next)
-		return ;
-	temp = *a;
-	*a = (*a)->next;
-	temp->next = (*a)->next;
-	(*a)->next = temp;
+char	*ft_strdup(const char *s)
+{
+	char	*ptr;
+	size_t	i;
+
+	i = 0;
+	while (s[i])
+		i++;
+	ptr = (char *)malloc(sizeof(char) * (i + 1));
+	if (!ptr)
+		return (NULL);
+	i = 0;
+	while (s[i])
+	{
+		ptr[i] = s[i];
+		i++;
+	}
+	ptr[i] = '\0';
+	return (ptr);
 }

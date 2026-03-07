@@ -1,25 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   s_func.c                                           :+:      :+:    :+:   */
+/*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tatev <tatev@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/04 15:20:36 by afaghaja          #+#    #+#             */
-/*   Updated: 2026/03/06 16:08:08 by tatev            ###   ########.fr       */
+/*   Created: 2026/02/03 20:13:09 by afaghaja          #+#    #+#             */
+/*   Updated: 2026/03/06 15:39:16 by tatev            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	s_func(t_list **a)
+void	ft_lstadd_front(t_list **lst, t_list *new)
 {
-	t_list	*temp;
-
-	if (!a || !(*a) || !(*a)->next)
+	if (!lst || !new)
 		return ;
-	temp = *a;
-	*a = (*a)->next;
-	temp->next = (*a)->next;
-	(*a)->next = temp;
+	new->next = *lst;
+	*lst = new;
 }

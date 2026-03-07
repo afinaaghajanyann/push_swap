@@ -1,25 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   s_func.c                                           :+:      :+:    :+:   */
+/*   rr_func.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tatev <tatev@student.42.fr>                +#+  +:+       +#+        */
+/*   By: afaghaja <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/04 15:20:36 by afaghaja          #+#    #+#             */
-/*   Updated: 2026/03/06 16:08:08 by tatev            ###   ########.fr       */
+/*   Created: 2026/03/04 17:42:04 by afaghaja          #+#    #+#             */
+/*   Updated: 2026/03/04 18:13:55 by afaghaja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	s_func(t_list **a)
+void	rr_func(t_struct )
 {
-	t_list	*temp;
-
-	if (!a || !(*a) || !(*a)->next)
-		return ;
-	temp = *a;
-	*a = (*a)->next;
-	temp->next = (*a)->next;
-	(*a)->next = temp;
+	return ;
 }

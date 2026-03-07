@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   s_func.c                                           :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tatev <tatev@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/04 15:20:36 by afaghaja          #+#    #+#             */
-/*   Updated: 2026/03/06 16:08:08 by tatev            ###   ########.fr       */
+/*   Created: 2026/01/26 17:29:01 by afaghaja          #+#    #+#             */
+/*   Updated: 2026/03/06 15:37:44 by tatev            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	s_func(t_list **a)
+size_t	ft_strlen(const char *s)
 {
-	t_list	*temp;
+	size_t	i;
 
-	if (!a || !(*a) || !(*a)->next)
-		return ;
-	temp = *a;
-	*a = (*a)->next;
-	temp->next = (*a)->next;
-	(*a)->next = temp;
+	i = 0;
+	while (s[i])
+	{
+		i++;
+	}
+	return (i);
 }
