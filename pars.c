@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pars.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afaghaja <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: larevsha <larevsha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/07 16:48:11 by afaghaja          #+#    #+#             */
-/*   Updated: 2026/03/19 16:21:15 by afaghaja         ###   ########.fr       */
+/*   Updated: 2026/03/25 20:13:14 by larevsha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,23 +30,28 @@ int	isvalid(char *str)
 	return (1);
 }
 
-void	pars(int argc, char **argv, int *arr)
+int	*parsing(char *array, int argc)
 {
+	int		*arr;
 	int		i;
-	char	**array;
+	char	**splitted_array;
 
-	array = ft_split(argv[argc - 1], ' ');
+	arr = malloc(sizeof(int) * (argc - 1));
+	if (!arr)
+		return (NULL);
+	splitted_array = ft_split(array, ' ');
 	i = 0;
-	while (array[i])
+	while (splitted_array[i])
 	{
-		if (!isvalid(array[i]))
+		if (!isvalid(splitted_array[i]))
 		{
 			write(2, "Error\n", 6);
 			exit(1);
 		}
-		arr[i] = ft_atoi(array[i]);
+		arr[i] = ft_atoi(splitted_array[i]);
 		i++;
 	}
+	return (arr);
 }
 
 // #include "push_swap.h"

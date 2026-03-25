@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lists.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afaghaja <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: larevsha <larevsha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 13:29:44 by lyov              #+#    #+#             */
-/*   Updated: 2026/03/19 16:21:47 by afaghaja         ###   ########.fr       */
+/*   Updated: 2026/03/25 20:15:45 by larevsha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,6 @@ t_list	*lists(int *arr, int size)
 		ft_lstadd_front(&list, new);
 		i++;
 	}
+	free(arr);
 	return (list);
 }

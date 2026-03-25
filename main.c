@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afaghaja <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: larevsha <larevsha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/21 00:52:44 by lyov              #+#    #+#             */
-/*   Updated: 2026/03/25 14:37:54 by afaghaja         ###   ########.fr       */
+/*   Updated: 2026/03/25 20:23:50 by larevsha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	zero(t_bench *count, t_oper *opers)
+void	valueing(t_bench *count, t_oper *opers, t_list *a, t_list *b)
 {
 	opers->sa = 0;
 	opers->sb = 0;
@@ -32,6 +32,8 @@ void	zero(t_bench *count, t_oper *opers)
 	count->complex = 0;
 	count->adaptive = 0;
 	count->bench = 0;
+	a = malloc(sizeof(t_list));
+	b = malloc(sizeof(t_list));
 }
 
 int	bench_pars(char **argv, t_bench *count)
@@ -98,19 +100,19 @@ int	start_point(int pars)
 	return (i);
 }
 
-void	start_sort(t_list *a, t_list *b, int alg, int size)
+void	start_sort(t_list *a, t_list *b, int alg)
 {
-	//if (alg == 1 || alg == 11)
-	//	simple(&a, &b);
-	/*else*/ if (alg == 2 || alg == 12)
-		chunk(a, b, size);
+	if (alg == 1 || alg == 11)
+		basic(&a, &b);
+	else if (alg == 2 || alg == 12)
+		chunk(&a, &b);
 	else if (alg == 3 || alg == 13)
 		radix(&a, &b);
-	//else if (alg == 4 || alg == 14 || alg == 0)
-	//	adaptive (&a, &b);
+	else if (alg == 4 || alg == 14 || alg == 0 || alg == 10)
+		adaptive (&a, &b);
 }
 
-void	isbench(int alg, t_oper *opers, double disorder /*, Afini adaptivic stanumenq tiv*/)
+void	isbench(int alg, t_oper *opers, int number)
 {
 	int	total;
 
@@ -119,11 +121,11 @@ void	isbench(int alg, t_oper *opers, double disorder /*, Afini adaptivic stanume
 	/*taki sax algery Afini adaptivi return tvern en*/
 	//write(2, "disorder: "&disorder, 5);
 	write(2, "strategy: ", 11);
-	if (alg == 11)
+	if (number == 1)
 		write(2, "Simple / O(n^2)", 18);
-	else if (alg == 11)
+	else if (number == 2)
 		write(2, "Adaptive / O(n√n))", 22);
-	else if (alg == 12)
+	else if (number == 3)
 		write(2, "Complex / O(nlogn)", 19);
 	write(2, "total_ops: ", 12);
 }
@@ -140,15 +142,17 @@ int	main(int argc, char **argv)
 	int		size;
 //dajy karanq alg jnjenq heto grenq vochte if alg < 10... ayl 
 // if method(count) < 10
-
-	b = NULL;
-	zero(&count, &opers);
+	valueing(&count, &opers, a, b);
 	pars = bench_pars(argv, &count);
 	i = start_point(pars);
 	alg = method(&count);
+	size = argc - i;
 //talis enq Afini kodi mej 	fill(argv, i) vor ta inti zangvac
 //	size = sizeof(/*Afini func*/) / sizeof(/*Afini func*/[0]);
 // u grenq a = lists(Afini funci kod, size) vor stananq list a;
-	start_sort(a, b, alg, size);
-	
+	a = lists(parsing(fill(argv, i), argc), size);
+	start_sort(a, b, alg);
+	isbench(alg, &opers, custom(disorder(&a), &a, &b));
+	free(a);
+	free(b);
 }

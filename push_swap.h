@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afaghaja <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: larevsha <larevsha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/04 15:04:37 by afaghaja          #+#    #+#             */
-/*   Updated: 2026/03/25 16:29:30 by afaghaja         ###   ########.fr       */
+/*   Updated: 2026/03/25 20:21:35 by larevsha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void				ft_lstadd_back(t_list **lst, t_list *new);
 int					ft_atoi(const char *nptr);
 char				*ft_strdup(const char *s);
 int					ft_lstsize(t_list *lst);
-void				pars(int argc, char **argv, int *arr);
+int					*parsing(char *array, int argc);
 void				pa(t_list **a, t_list **b);
 void				pb(t_list **a, t_list **b);
 void				ra(t_list **a);
@@ -79,9 +79,10 @@ int					find_the_element(t_list **b, int v);
 void				indexavorel(t_list **a);
 void				rotate(t_list **b, int count);
 void				find_max(t_list **b);
-char				*fill(char **argv);
+char				*fill(char **argv, int i);
 t_list				*lists(int *arr, int size);
 int					isvalid(char *str);
 void				ft_lstclear(t_list **lst, void (*del)(void *));
+void				valueing(t_bench *count, t_oper *opers, t_list *a, t_list *b);
 
 #endif
