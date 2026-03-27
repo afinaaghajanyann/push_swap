@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   custom.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: larevsha <larevsha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afaghaja <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/18 16:27:32 by afaghaja          #+#    #+#             */
-/*   Updated: 2026/03/25 16:59:43 by larevsha         ###   ########.fr       */
+/*   Updated: 2026/03/27 15:19:53 by afaghaja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,17 +43,17 @@ int	custom(float dis, t_list **a, t_list **b)
 {
 	if (dis < 0.2)
 	{
-		basic(&a, &b);
+		basic(a, b);
 		return(1);
 	}
 	else if (dis >= 0.2 && dis < 0.5)
 	{
-		chunk(&a, &b);
+		chunk(a, b);
 		return(2);
 	}
 	else
 	{
-		radix(&a, &b);
+		radix(a, b);
 		return(3);
 	}
 }

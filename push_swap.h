@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: larevsha <larevsha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afaghaja <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/04 15:04:37 by afaghaja          #+#    #+#             */
-/*   Updated: 2026/03/25 20:21:35 by larevsha         ###   ########.fr       */
+/*   Updated: 2026/03/27 15:21:47 by afaghaja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,14 @@ void				find_max(t_list **b);
 char				*fill(char **argv, int i);
 t_list				*lists(int *arr, int size);
 int					isvalid(char *str);
+int					ft_strncmp(const char *s1, const char *s2, size_t n);
 void				ft_lstclear(t_list **lst, void (*del)(void *));
-void				valueing(t_bench *count, t_oper *opers, t_list *a, t_list *b);
+void				valueing(t_bench *count, t_oper *opers);
+void				chunk(t_list **a, t_list **b);
+void				radix(t_list **a, t_list **b);
+int					custom(float dis, t_list **a, t_list **b);
+char				*ft_itoa(int n);
+int					return_rem(float n);
+float				disorder(t_list **a);
 
 #endif

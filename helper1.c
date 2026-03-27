@@ -6,7 +6,7 @@
 /*   By: afaghaja <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 14:47:38 by afaghaja          #+#    #+#             */
-/*   Updated: 2026/03/25 16:30:42 by afaghaja         ###   ########.fr       */
+/*   Updated: 2026/03/27 15:24:55 by afaghaja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,13 @@ t_list	*ft_lstnew(int value)
 	node->num = value;
 	node->next = NULL;
 	return (node);
+}
+
+void	ft_lstdelone(t_list *lst, void (*del)(void *))
+{
+	if (!lst || !del)
+		return ;
+	free(lst);
 }
 
 void	ft_lstclear(t_list **lst, void (*del)(void *))
@@ -88,4 +95,31 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	}
 	ptr[i] = '\0';
 	return (ptr);
+}
+
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
+{
+	size_t			i;
+	unsigned char	*u1;
+	unsigned char	*u2;
+
+	u1 = (unsigned char *)s1;
+	u2 = (unsigned char *)s2;
+	i = 0;
+	while (i < n && (u1[i] || u2[i]))
+	{
+		if (u1[i] != u2[i])
+			return (u1[i] - u2[i]);
+		i++;
+	}
+	return (0);
+}
+
+t_list	*ft_lstlast(t_list *lst)
+{
+	if (!lst)
+		return (NULL);
+	while (lst->next)
+		lst = lst->next;
+	return (lst);
 }

@@ -6,37 +6,37 @@
 /*   By: afaghaja <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 18:37:35 by afaghaja          #+#    #+#             */
-/*   Updated: 2026/03/25 16:29:58 by afaghaja         ###   ########.fr       */
+/*   Updated: 2026/03/27 15:44:35 by afaghaja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	indexavorel(t_list **a)
-{
-	t_list	*tmp1;
-	t_list	*tmp2;
-	int		val;
-	int		count;
+// void	indexavorel(t_list **a)
+// {
+// 	t_list	*tmp1;
+// 	t_list	*tmp2;
+// 	int		val;
+// 	int		count;
 
-	tmp1 = *a;
-	while (tmp1)
-	{
-		tmp2 = *a;
-		count = 0;
-		val = tmp1->num;
-		while (tmp2)
-		{
-			if (val > tmp2->num)
-			{
-				count++;
-			}
-			tmp2 = tmp2->next;
-		}
-		tmp1->index = count;
-		tmp1 = tmp1->next;
-	}
-}
+// 	tmp1 = *a;
+// 	while (tmp1)
+// 	{
+// 		tmp2 = *a;
+// 		count = 0;
+// 		val = tmp1->num;
+// 		while (tmp2)
+// 		{
+// 			if (val > tmp2->num)
+// 			{
+// 				count++;
+// 			}
+// 			tmp2 = tmp2->next;
+// 		}
+// 		tmp1->index = count;
+// 		tmp1 = tmp1->next;
+// 	}
+// }
 
 int	find_the_element(t_list **b, int v)
 {

@@ -1,36 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lists.c                                            :+:      :+:    :+:   */
+/*   ret_reminder.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: afaghaja <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/09 13:29:44 by lyov              #+#    #+#             */
-/*   Updated: 2026/03/27 14:58:48 by afaghaja         ###   ########.fr       */
+/*   Created: 2026/03/26 19:23:05 by afaghaja          #+#    #+#             */
+/*   Updated: 2026/03/26 20:10:58 by afaghaja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
-
-t_list	*lists(int *arr, int size)
+int	return_rem(float n)
 {
-	int		i;
-	t_list	*new;
-	t_list	*list;
+	int i;
+	float rem;
 
-	i = 0;
-	list = NULL;
-	while (i < size)
-	{
-		new = ft_lstnew(arr[i]);
-		if (!new)
-		{
-			ft_lstclear(&list, NULL);
-			return (NULL);
-		}
-		ft_lstadd_back(&list, new);
-		i++;
-	}
-	free(arr);
-	return (list);
+	i = n;
+	rem = n - i;
+	while ((int)rem != rem)
+		rem *= 10;
+	return (rem);
 }

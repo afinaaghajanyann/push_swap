@@ -6,7 +6,7 @@
 /*   By: afaghaja <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 14:56:23 by afaghaja          #+#    #+#             */
-/*   Updated: 2026/03/25 15:00:32 by afaghaja         ###   ########.fr       */
+/*   Updated: 2026/03/27 14:57:37 by afaghaja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ void	ft_lstadd_front(t_list **lst, t_list *new)
 
 int	ft_atoi(const char *nptr)
 {
-	int	i;
-	int	res;
-	int	sign;
+	int			i;
+	long long	res;
+	int			sign;
 
 	i = 0;
 	res = 0;
@@ -61,13 +61,18 @@ int	ft_atoi(const char *nptr)
 		res = (res * 10) + (nptr[i] - '0');
 		i++;
 	}
+	if (res > INT_MAX && res < INT_MIN)
+	{
+		write(2, "Error\n", 6);
+		exit(1);
+	}
 	return (res * sign);
 }
 
 char	*ft_strdup(const char *s)
 {
-	char *ptr;
-	size_t i;
+	char	*ptr;
+	size_t	i;
 
 	i = 0;
 	while (s[i])
@@ -82,5 +87,29 @@ char	*ft_strdup(const char *s)
 		i++;
 	}
 	ptr[i] = '\0';
+	return (ptr);
+}
+
+char	*ft_strjoin(char const *s1, char const *s2)
+{
+	size_t	i;
+	size_t	s1_len;
+	size_t	s2_len;
+	char	*ptr;
+
+	if (!s1 || !s2)
+		return (NULL);
+	s1_len = ft_strlen(s1);
+	s2_len = ft_strlen(s2);
+	ptr = malloc((s1_len + s2_len + 1) * sizeof(char));
+	if (!ptr)
+		return (NULL);
+	i = -1;
+	while (s1[++i])
+		ptr[i] = s1[i];
+	i = -1;
+	while (s2[++i])
+		ptr[s1_len + i] = s2[i];
+	ptr[s1_len + i] = '\0';
 	return (ptr);
 }
