@@ -6,7 +6,7 @@
 /*   By: afaghaja <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/21 00:52:44 by lyov              #+#    #+#             */
-/*   Updated: 2026/03/27 15:47:05 by afaghaja         ###   ########.fr       */
+/*   Updated: 2026/03/27 16:43:39 by afaghaja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ int	method(t_bench *count)
 	return (alg);
 }
 
-int	start_point(int pars, t_list **a, t_list **b)
+int	start_point(int pars, t_list **a, t_list **b, t_bench *count, t_oper *opers)
 {
 	int	i;
 
@@ -89,8 +89,11 @@ int	start_point(int pars, t_list **a, t_list **b)
 	{
 		free(a);
 		free(b);
+		free(count);
+		free(opers);
 		write(2, "Error\n", 6);
 		exit(1);
+		//	qcel arandzin function
 	}
 	else if (pars == 0)
 		i = 1;
@@ -101,16 +104,16 @@ int	start_point(int pars, t_list **a, t_list **b)
 	return (i);
 }
 
-void	start_sort(t_list **a, t_list **b, int alg, float dis)
+void	start_sort(t_list **a, t_list **b, int alg, t_oper *opers)
 {
 	if (alg == 1 || alg == 11)
-		basic(a, b);
+		basic(a, b, opers);
 	else if (alg == 2 || alg == 12)
-		chunk(a, b);
+		chunk(a, b, opers);
 	else if (alg == 3 || alg == 13)
-		radix(a, b);
+		radix(a, b, opers);
 	else if (alg == 4 || alg == 14 || alg == 0 || alg == 10)
-		custom(dis, a, b);
+		custom(disorder(a), a, b, opers);
 }
 
 void	putnbr(int total)
@@ -174,8 +177,8 @@ int	main(int argc, char **argv)
 {
 	t_list	**a;
 	t_list	**b;
-	t_bench	count;
-	t_oper	opers;
+	t_bench	*count;
+	t_oper	*opers;
 	int		alg;
 	int		pars;
 	int		i;
@@ -183,16 +186,18 @@ int	main(int argc, char **argv)
 
 	a = NULL;
 	b = NULL;
-	*a = malloc(sizeof(t_list));
-	*b = malloc(sizeof(t_list));
-	valueing(&count, &opers);
-	pars = bench_pars(argv, &count);
-	i = start_point(pars, a, b);
-	alg = method(&count);
+	count = malloc(sizeof(t_bench));
+	opers = malloc(sizeof(t_oper));
+	valueing(count, opers);
+	pars = bench_pars(argv, count);
+	i = start_point(pars, a, b, count, opers);
+	alg = method(count);
 	size = argc - i;
 	*a = lists(parsing(fill(argv, i), argc), size);
-	start_sort(a, b, alg, disorder(a));
-	isbench(alg, &opers, custom(disorder(a), a, b));
+	start_sort(a, b, alg, opers);
+	isbench(alg, opers, custom(disorder(a), a, b, opers));
 	free(a);
 	free(b);
+	free(count);
+	free(opers);
 }

@@ -6,7 +6,7 @@
 /*   By: afaghaja <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 18:37:35 by afaghaja          #+#    #+#             */
-/*   Updated: 2026/03/27 15:44:35 by afaghaja         ###   ########.fr       */
+/*   Updated: 2026/03/27 16:04:59 by afaghaja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	find_the_element(t_list **b, int v)
 	return (count);
 }
 
-void	rotate(t_list **b, int count)
+void	rotate(t_list **b, int count, t_oper *opers)
 {
 	int	size;
 
@@ -64,7 +64,7 @@ void	rotate(t_list **b, int count)
 	{
 		while (count > 0)
 		{
-			rb(b);
+			rb(b, opers);
 			count--;
 		}
 	}
@@ -73,13 +73,13 @@ void	rotate(t_list **b, int count)
 		count = size - count;
 		while (count > 0)
 		{
-			rrb(b);
+			rrb(b, opers);
 			count--;
 		}
 	}
 }
 
-void	find_max(t_list **b)
+void	find_max(t_list **b, t_oper *opers)
 {
 	t_list	*tmp_l;
 	int		max;
@@ -100,10 +100,10 @@ void	find_max(t_list **b)
 		count++;
 		tmp_l = tmp_l->next;
 	}
-	rotate(b, pos);
+	rotate(b, pos, opers);
 }
 
-void	basic(t_list **a, t_list **b)
+void	basic(t_list **a, t_list **b, t_oper *opers)
 {
 	int		ind;
 	t_list	*temp;
@@ -113,10 +113,10 @@ void	basic(t_list **a, t_list **b)
 	{
 		temp = *a;
 		ind = find_the_element(b, temp->index);
-		rotate(b, ind);
-		pb(b, a);
+		rotate(b, ind, opers);
+		pb(b, a, opers);
 	}
-	find_max(b);
+	find_max(b, opers);
 	while (*b)
-		pa(a, b);
+		pa(a, b, opers);
 }

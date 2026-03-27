@@ -6,13 +6,13 @@
 /*   By: afaghaja <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 14:42:19 by afaghaja          #+#    #+#             */
-/*   Updated: 2026/03/25 14:42:54 by afaghaja         ###   ########.fr       */
+/*   Updated: 2026/03/27 15:55:23 by afaghaja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	rra(t_list **a)
+void	rra(t_list **a, t_oper *opers)
 {
 	t_list	*last;
 	t_list	*prev;
@@ -28,9 +28,10 @@ void	rra(t_list **a)
 	*a = last;
 	write(1, "rra", 3);
 	write(1, "\n", 1);
+	opers->rra++;
 }
 
-void	rrb(t_list **a)
+void	rrb(t_list **a, t_oper *opers)
 {
 	t_list	*last;
 	t_list	*prev;
@@ -46,9 +47,10 @@ void	rrb(t_list **a)
 	*a = last;
 	write(1, "rrb", 3);
 	write(1, "\n", 1);
+	opers->rrb++;
 }
 
-void	rrr(t_list **a, t_list **b)
+void	rrr(t_list **a, t_list **b, t_oper *opers)
 {
 	t_list	*last;
 	t_list	*prev;
@@ -74,4 +76,5 @@ void	rrr(t_list **a, t_list **b)
 	last2->next = *b;
 	*b = last2;
 	write(1, "rrr\n", 4);
+	opers->rrr++;
 }

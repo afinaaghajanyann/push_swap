@@ -6,7 +6,7 @@
 /*   By: afaghaja <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/04 15:04:37 by afaghaja          #+#    #+#             */
-/*   Updated: 2026/03/27 15:21:47 by afaghaja         ###   ########.fr       */
+/*   Updated: 2026/03/27 16:40:04 by afaghaja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,33 +61,31 @@ int					ft_atoi(const char *nptr);
 char				*ft_strdup(const char *s);
 int					ft_lstsize(t_list *lst);
 int					*parsing(char *array, int argc);
-void				pa(t_list **a, t_list **b);
-void				pb(t_list **a, t_list **b);
-void				ra(t_list **a);
-void				rb(t_list **a);
-void				rr(t_list **a, t_list **b);
-void				rra(t_list **a);
-void				rrb(t_list **a);
-void				rrr(t_list **a, t_list **b);
-void				sb(t_list **a);
-void				sa(t_list **a);
-void				ss(t_list **a, t_list **b);
-void				basic(t_list **a, t_list **b);
-void				find_max(t_list **b);
-void				rotate(t_list **b, int count);
+void				pa(t_list **a, t_list **b, t_oper *opers);
+void				pb(t_list **a, t_list **b, t_oper *opers);
+void				ra(t_list **a, t_oper *opers);
+void				rb(t_list **a, t_oper *opers);
+void				rr(t_list **a, t_list **b, t_oper *opers);
+void				rra(t_list **a, t_oper *opers);
+void				rrb(t_list **a, t_oper *opers);
+void				rrr(t_list **a, t_list **b, t_oper *opers);
+void				sb(t_list **a, t_oper *opers);
+void				sa(t_list **a, t_oper *opers);
+void				ss(t_list **a, t_list **b, t_oper *opers);
+void				basic(t_list **a, t_list **b, t_oper *opers);
+void				rotate(t_list **b, int count, t_oper *opers);
 int					find_the_element(t_list **b, int v);
 void				indexavorel(t_list **a);
-void				rotate(t_list **b, int count);
-void				find_max(t_list **b);
+void				find_max(t_list **b, t_oper *opers);
 char				*fill(char **argv, int i);
 t_list				*lists(int *arr, int size);
 int					isvalid(char *str);
 int					ft_strncmp(const char *s1, const char *s2, size_t n);
 void				ft_lstclear(t_list **lst, void (*del)(void *));
 void				valueing(t_bench *count, t_oper *opers);
-void				chunk(t_list **a, t_list **b);
-void				radix(t_list **a, t_list **b);
-int					custom(float dis, t_list **a, t_list **b);
+void				chunk(t_list **a, t_list **b, t_oper *opers);
+void				radix(t_list **a, t_list **b, t_oper *opers);
+int					custom(float dis, t_list **a, t_list **b, t_oper *opers);
 char				*ft_itoa(int n);
 int					return_rem(float n);
 float				disorder(t_list **a);

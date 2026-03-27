@@ -6,7 +6,7 @@
 /*   By: afaghaja <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/18 17:54:15 by afaghaja          #+#    #+#             */
-/*   Updated: 2026/03/25 16:30:13 by afaghaja         ###   ########.fr       */
+/*   Updated: 2026/03/27 16:35:10 by afaghaja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	chunk_size(t_list **a)
 	return (size);
 }
 
-void	push_chunk(t_list **a, t_list **b, int size)
+void	push_chunk(t_list **a, t_list **b, int size, t_oper *opers)
 {
 	int	limit;
 	int pushed;
@@ -61,26 +61,26 @@ void	push_chunk(t_list **a, t_list **b, int size)
 	{
 		if ((*a)->index < limit)
 		{
-			pb(b, a);
+			pb(b, a, opers);
 			pushed++;
 			if (pushed == limit)
 				limit += size;
 		}
 		else
-			ra(a);
+			ra(a, opers);
 	}
 }
 
-void	chunk(t_list **a, t_list **b)
+void	chunk(t_list **a, t_list **b, t_oper *opers)
 {
 	int	size;
 
 	indexavorel(a);
 	size = chunk_size(a);
-	push_chunk(a, b, size);
+	push_chunk(a, b, size, opers);
 	while (*b)
 	{
-		find_max(b);
-		pa(a, b);
+		find_max(b, opers);
+		pa(a, b, opers);
 	}
 }

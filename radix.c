@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   radix.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lyov <lyov@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: afaghaja <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 21:36:12 by larevsha          #+#    #+#             */
-/*   Updated: 2026/03/20 02:39:45 by lyov             ###   ########.fr       */
+/*   Updated: 2026/03/27 16:16:53 by afaghaja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	max_value(int size)
 	return (i);
 }
 
-void	radix(t_list **a, t_list **b)
+void	radix(t_list **a, t_list **b, t_oper *opers)
 {
 	int	size;
 	int	bit;
@@ -44,13 +44,13 @@ void	radix(t_list **a, t_list **b)
 		while (i < size)
 		{
 			if ((*a)->index >> bit & 1)
-				ra(a);
+				ra(a, opers);
 			else
-				pb(a, b);
+				pb(a, b, opers);
 			i++;
 		}
 		while (*b)
-			pa(a, b);
+			pa(a, b, opers);
 		bit++;
 	}
 }

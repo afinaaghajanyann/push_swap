@@ -6,7 +6,7 @@
 /*   By: afaghaja <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/18 16:27:32 by afaghaja          #+#    #+#             */
-/*   Updated: 2026/03/27 15:19:53 by afaghaja         ###   ########.fr       */
+/*   Updated: 2026/03/27 16:39:43 by afaghaja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,21 +39,21 @@ float	disorder(t_list **a)
 	return (mistakes / total_pairs);
 }
 
-int	custom(float dis, t_list **a, t_list **b)
+int	custom(float dis, t_list **a, t_list **b, t_oper *opers)
 {
 	if (dis < 0.2)
 	{
-		basic(a, b);
+		basic(a, b, opers);
 		return(1);
 	}
 	else if (dis >= 0.2 && dis < 0.5)
 	{
-		chunk(a, b);
+		chunk(a, b, opers);
 		return(2);
 	}
 	else
 	{
-		radix(a, b);
+		radix(a, b, opers);
 		return(3);
 	}
 }
