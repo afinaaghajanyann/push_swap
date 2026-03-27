@@ -6,7 +6,7 @@
 /*   By: afaghaja <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/04 15:04:37 by afaghaja          #+#    #+#             */
-/*   Updated: 2026/03/27 16:40:04 by afaghaja         ###   ########.fr       */
+/*   Updated: 2026/03/27 19:57:47 by afaghaja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void				ft_lstadd_back(t_list **lst, t_list *new);
 int					ft_atoi(const char *nptr);
 char				*ft_strdup(const char *s);
 int					ft_lstsize(t_list *lst);
-int					*parsing(char *array, int argc);
+int					*parsing(char *array);
 void				pa(t_list **a, t_list **b, t_oper *opers);
 void				pb(t_list **a, t_list **b, t_oper *opers);
 void				ra(t_list **a, t_oper *opers);

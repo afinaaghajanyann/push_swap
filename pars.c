@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pars.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: larevsha <larevsha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afaghaja <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/07 16:48:11 by afaghaja          #+#    #+#             */
-/*   Updated: 2026/03/25 20:13:14 by larevsha         ###   ########.fr       */
+/*   Updated: 2026/03/27 19:57:26 by afaghaja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,13 @@ int	isvalid(char *str)
 	return (1);
 }
 
-int	*parsing(char *array, int argc)
+int	*parsing(char *array)
 {
 	int		*arr;
 	int		i;
 	char	**splitted_array;
 
-	arr = malloc(sizeof(int) * (argc - 1));
+	arr = malloc(sizeof(int) * (ft_strlen(array)));
 	if (!arr)
 		return (NULL);
 	splitted_array = ft_split(array, ' ');

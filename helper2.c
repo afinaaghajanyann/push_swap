@@ -6,7 +6,7 @@
 /*   By: afaghaja <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 14:56:23 by afaghaja          #+#    #+#             */
-/*   Updated: 2026/03/27 14:57:37 by afaghaja         ###   ########.fr       */
+/*   Updated: 2026/03/27 20:20:08 by afaghaja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	ft_atoi(const char *nptr)
 		res = (res * 10) + (nptr[i] - '0');
 		i++;
 	}
-	if (res > INT_MAX && res < INT_MIN)
+	if (res > INT_MAX || res < INT_MIN)
 	{
 		write(2, "Error\n", 6);
 		exit(1);

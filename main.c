@@ -6,7 +6,7 @@
 /*   By: afaghaja <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/21 00:52:44 by lyov              #+#    #+#             */
-/*   Updated: 2026/03/27 16:43:39 by afaghaja         ###   ########.fr       */
+/*   Updated: 2026/03/27 20:53:13 by afaghaja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,12 @@ void	valueing(t_bench *count, t_oper *opers)
 	count->bench = 0;
 }
 
-int	bench_pars(char **argv, t_bench *count)
+int	bench_pars(char **argv, t_bench *count, int argc)
 {
 	int	i;
 
 	i = 0;
-	while (++i <= 2)
+	while (++i <= 2 && i < argc)
 	{
 		if (ft_strncmp(argv[i], "--simple", 9) == 0)
 			(count->simple)++;
@@ -112,8 +112,6 @@ void	start_sort(t_list **a, t_list **b, int alg, t_oper *opers)
 		chunk(a, b, opers);
 	else if (alg == 3 || alg == 13)
 		radix(a, b, opers);
-	else if (alg == 4 || alg == 14 || alg == 0 || alg == 10)
-		custom(disorder(a), a, b, opers);
 }
 
 void	putnbr(int total)
@@ -138,7 +136,7 @@ void	write_t_oper(t_oper *opers)
 	putnbr(opers->ss);
 	write(2, " ", 1);
 	write(2, "pa: ", 4);
-	putnbr(opers->sb);
+	putnbr(opers->pa);
 	write(2, " ", 1);
 }
 
@@ -152,7 +150,7 @@ void	isbench(int alg, t_oper *opers, int number)
 		return ;
 	total = opers->pa + opers->pb + opers->ra + opers->rb + opers->rra
 		+ opers->rrb + opers->rrr + opers->sa;
-	write(2, "disorder: ", 11);
+	write(2, "disorder: ", 10);
 	s1 = ft_itoa(number);
 	s2 = ft_itoa(return_rem(number));
 	write(2, s1, ft_strlen(s1));
@@ -171,33 +169,40 @@ void	isbench(int alg, t_oper *opers, int number)
 	write(2, "total_ops: ", 12);
 	putnbr(total);
 	write(2, "\n", 1);
+	write_t_oper(opers);
 }
 
 int	main(int argc, char **argv)
 {
-	t_list	**a;
-	t_list	**b;
+	t_list	*a;
+	t_list	*b;
 	t_bench	*count;
 	t_oper	*opers;
 	int		alg;
 	int		pars;
 	int		i;
 	int		size;
+	int		strat;
 
 	a = NULL;
 	b = NULL;
 	count = malloc(sizeof(t_bench));
 	opers = malloc(sizeof(t_oper));
 	valueing(count, opers);
-	pars = bench_pars(argv, count);
+	pars = bench_pars(argv, count, argc);
 	i = start_point(pars, a, b, count, opers);
 	alg = method(count);
-	size = argc - i;
-	*a = lists(parsing(fill(argv, i), argc), size);
+	a = lists(parsing(fill(argv, i)), size);
+	size = ft_lstzise(a);
+	if (alg == 4 || alg == 14 || alg == 0 || alg == 10)
+		strat = custom(disorder(a), a, b, opers);
 	start_sort(a, b, alg, opers);
-	isbench(alg, opers, custom(disorder(a), a, b, opers));
-	free(a);
-	free(b);
+	if (alg == 4 || alg == 14 || alg == 0 || alg == 10)
+		isbench(alg, opers, strat);
+	else
+		isbench(alg, opers, alg);
+	ft_lstclear(&a, NULL);
+	ft_lstclear(&b, NULL);
 	free(count);
 	free(opers);
 }
