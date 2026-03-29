@@ -6,7 +6,7 @@
 /*   By: afaghaja <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/07 16:48:11 by afaghaja          #+#    #+#             */
-/*   Updated: 2026/03/27 19:57:26 by afaghaja         ###   ########.fr       */
+/*   Updated: 2026/03/29 19:46:17 by afaghaja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,27 +30,54 @@ int	isvalid(char *str)
 	return (1);
 }
 
-int	*parsing(char *array)
+int is_repetetive(char **str)
+{
+	int i;
+	int j;
+
+	i = 0;
+	j = 0;
+	while (str[i])
+	{
+		j = i + 1;
+		while (str[j])
+		{
+			if (ft_strcmp(str[i], str[j]) == 0)
+				return (0);
+			j++;
+		}
+		i++;
+	}
+	return (1);
+}
+
+int	*parsing(char *array, int *size)
 {
 	int		*arr;
 	int		i;
-	char	**splitted_array;
+	char	**splitted_arr;
 
+	*size = 0;
 	arr = malloc(sizeof(int) * (ft_strlen(array)));
 	if (!arr)
-		return (NULL);
-	splitted_array = ft_split(array, ' ');
-	i = 0;
-	while (splitted_array[i])
 	{
-		if (!isvalid(splitted_array[i]))
-		{
-			write(2, "Error\n", 6);
-			exit(1);
-		}
-		arr[i] = ft_atoi(splitted_array[i]);
+		free(array);
+		cleaning();
+	}
+	
+	splitted_arr = ft_split(array, ' ');
+	while (splitted_arr[*size])
+		(*size)++;
+	i = 0;
+	while (splitted_arr[i])
+	{
+		if (!isvalid(splitted_arr[i]) || !is_repetetive(splitted_arr))
+			pars_free(array, arr, splitted_arr);
+		arr[i] = ft_atoi(splitted_arr[i], array, arr, splitted_arr);
 		i++;
 	}
+	free(splitted_arr);
+	free(array);
 	return (arr);
 }
 
