@@ -6,7 +6,7 @@
 /*   By: afaghaja <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/26 19:23:05 by afaghaja          #+#    #+#             */
-/*   Updated: 2026/03/26 20:10:58 by afaghaja         ###   ########.fr       */
+/*   Updated: 2026/03/30 00:10:19 by afaghaja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ int	return_rem(float n)
 
 	i = n;
 	rem = n - i;
-	while ((int)rem != rem)
-		rem *= 10;
-	return (rem);
+	i = (int)(rem * 100 + 0.5);
+	return (i);
 }

@@ -6,7 +6,7 @@
 /*   By: afaghaja <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 21:36:12 by larevsha          #+#    #+#             */
-/*   Updated: 2026/03/27 16:16:53 by afaghaja         ###   ########.fr       */
+/*   Updated: 2026/03/29 19:36:45 by afaghaja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	radix(t_list **a, t_list **b, t_oper *opers)
 			if ((*a)->index >> bit & 1)
 				ra(a, opers);
 			else
-				pb(a, b, opers);
+				pb(b, a, opers);
 			i++;
 		}
 		while (*b)

@@ -1,37 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lists.c                                            :+:      :+:    :+:   */
+/*   cleaning.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afaghaja <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: larevsha <larevsha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/09 13:29:44 by lyov              #+#    #+#             */
-/*   Updated: 2026/03/29 19:59:10 by afaghaja         ###   ########.fr       */
+/*   Created: 2026/03/28 17:12:30 by larevsha          #+#    #+#             */
+/*   Updated: 2026/03/28 18:06:52 by larevsha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_list	*lists(int *arr, int *size)
+void	cleaning(void)
 {
-	int		i;
-	t_list	*new;
-	t_list	*list;
+	write(2, "Error\n", 6);
+	exit(1);
+}
 
-	i = 0;
-	list = NULL;
-	while (i < *size)
-	{
-		new = ft_lstnew(arr[i]);
-		if (!new)
-		{
-			free(arr);
-			ft_lstclear(&list, NULL);
-			cleaning();
-		}
-		ft_lstadd_back(&list, new);
-		i++;
-	}
+void	pars_free(char *array, int *arr, char **splitted_arr)
+{
 	free(arr);
-	return (list);
+	free(array);
+	free(splitted_arr);
+	cleaning();
 }

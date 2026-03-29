@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   helper2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afaghaja <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: larevsha <larevsha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 14:56:23 by afaghaja          #+#    #+#             */
-/*   Updated: 2026/03/27 20:20:08 by afaghaja         ###   ########.fr       */
+/*   Updated: 2026/03/28 18:09:37 by larevsha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	ft_lstadd_front(t_list **lst, t_list *new)
 	*lst = new;
 }
 
-int	ft_atoi(const char *nptr)
+int	ft_atoi(const char *nptr, char *array, int *arr, char **splitted_arr)
 {
 	int			i;
 	long long	res;
@@ -61,11 +61,8 @@ int	ft_atoi(const char *nptr)
 		res = (res * 10) + (nptr[i] - '0');
 		i++;
 	}
-	if (res > INT_MAX || res < INT_MIN)
-	{
-		write(2, "Error\n", 6);
-		exit(1);
-	}
+	if (res < INT_MIN || res > INT_MAX)
+		pars_free(array, arr, splitted_arr);
 	return (res * sign);
 }
 

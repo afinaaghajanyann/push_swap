@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill_arr.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afaghaja <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: larevsha <larevsha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/08 13:30:55 by lyov              #+#    #+#             */
-/*   Updated: 2026/03/27 16:34:34 by afaghaja         ###   ########.fr       */
+/*   Updated: 2026/03/28 20:35:54 by larevsha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ char	*fill(char **argv, int i)
 	char	*temp;
 
 	arr = ft_strdup("");
+	if (!arr)
+		cleaning();
 	while (argv[i])
 	{
 		temp = arr;

@@ -6,7 +6,7 @@ CFLAGS = -Wall -Wextra -Werror
 SRCS = 	basic.c     ft_itoa.c	lists.c   p_funcs.c    ret_reminder.c \
 		chunk.c     ft_split.c	main.c  r_funcs.c \
 		custom.c    helper1.c  rr_funcs.c \
-		fill_arr.c  helper2.c	pars.c	  radix.c      s_funcs.c 
+		fill_arr.c  helper2.c	pars.c	  radix.c    s_funcs.c 	   cleaning.c    smalls.c
 
 
 OBJS = $(SRCS:.c=.o)

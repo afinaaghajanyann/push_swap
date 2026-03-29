@@ -6,13 +6,13 @@
 /*   By: afaghaja <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/21 00:52:44 by lyov              #+#    #+#             */
-/*   Updated: 2026/03/27 20:53:13 by afaghaja         ###   ########.fr       */
+/*   Updated: 2026/03/30 00:14:53 by afaghaja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	valueing(t_bench *count, t_oper *opers)
+void	valueing(t_bench *count, t_oper *opers, t_list **a, t_list **b)
 {
 	opers->sa = 0;
 	opers->sb = 0;
@@ -30,6 +30,8 @@ void	valueing(t_bench *count, t_oper *opers)
 	count->complex = 0;
 	count->adaptive = 0;
 	count->bench = 0;
+	*a = NULL;
+	*b = NULL;
 }
 
 int	bench_pars(char **argv, t_bench *count, int argc)
@@ -80,20 +82,16 @@ int	method(t_bench *count)
 	return (alg);
 }
 
-int	start_point(int pars, t_list **a, t_list **b, t_bench *count, t_oper *opers)
+int	start_point(int pars, t_list **a, t_list **b)
 {
 	int	i;
 
 	i = 0;
 	if (pars == -1)
 	{
-		free(a);
-		free(b);
-		free(count);
-		free(opers);
-		write(2, "Error\n", 6);
-		exit(1);
-		//	qcel arandzin function
+		ft_lstclear(a, NULL);
+		ft_lstclear(b, NULL);
+		cleaning();
 	}
 	else if (pars == 0)
 		i = 1;
@@ -163,7 +161,7 @@ void	isbench(int alg, t_oper *opers, int number)
 	if (number == 1)
 		write(2, "Simple / O(n^2)\n", 16);
 	else if (number == 2)
-		write(2, "Adaptive / O(n√n)\n", 18);
+		write(2, "Medium / O(n√n)\n", 16);
 	else if (number == 3)
 		write(2, "Complex / O(nlogn)\n", 19);
 	write(2, "total_ops: ", 12);
@@ -172,37 +170,57 @@ void	isbench(int alg, t_oper *opers, int number)
 	write_t_oper(opers);
 }
 
+void print_list(t_list *a)
+{
+    t_list *current = a;
+    while (current)
+    {
+        printf("%d ", current->num);
+        current = current->next;
+    }
+    printf("\n");
+}
+
 int	main(int argc, char **argv)
 {
 	t_list	*a;
 	t_list	*b;
-	t_bench	*count;
-	t_oper	*opers;
+	t_bench	count;
+	t_oper	opers;
 	int		alg;
 	int		pars;
 	int		i;
 	int		size;
 	int		strat;
 
-	a = NULL;
-	b = NULL;
-	count = malloc(sizeof(t_bench));
-	opers = malloc(sizeof(t_oper));
-	valueing(count, opers);
-	pars = bench_pars(argv, count, argc);
-	i = start_point(pars, a, b, count, opers);
-	alg = method(count);
-	a = lists(parsing(fill(argv, i)), size);
-	size = ft_lstzise(a);
-	if (alg == 4 || alg == 14 || alg == 0 || alg == 10)
-		strat = custom(disorder(a), a, b, opers);
-	start_sort(a, b, alg, opers);
-	if (alg == 4 || alg == 14 || alg == 0 || alg == 10)
-		isbench(alg, opers, strat);
-	else
-		isbench(alg, opers, alg);
+	if (argc < 2)
+		return (0);
+	valueing(&count, &opers, &a, &b);
+	pars = bench_pars(argv, &count, argc);
+	i = start_point(pars, &a, &b);
+	alg = method(&count);
+	a = lists(parsing(fill(argv, i), &size), &size);
+	// printf("size = %d\n", size);
+	// printf("i = %d\n", i);
+	// printf("listeri tvery: ");
+	// print_list(a);
+	// printf("disordery: %f\n", disorder(&a));
+	if (disorder(&a))
+	{
+		if (alg == 4 || alg == 14 || alg == 0 || alg == 10)
+			strat = custom(disorder(&a), &a, &b, &opers);
+		start_sort(&a, &b, alg, &opers);
+		if (alg == 4 || alg == 14 || alg == 0 || alg == 10)
+			isbench(alg, &opers, strat);
+		else
+			isbench(alg, &opers, alg);
+	}
+	t_list *tmp = a;
+    while(tmp)
+    {
+       printf("%d\n", tmp->num);
+       tmp = tmp->next;
+    }
 	ft_lstclear(&a, NULL);
 	ft_lstclear(&b, NULL);
-	free(count);
-	free(opers);
 }

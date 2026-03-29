@@ -6,37 +6,12 @@
 /*   By: afaghaja <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/18 17:54:15 by afaghaja          #+#    #+#             */
-/*   Updated: 2026/03/27 16:35:10 by afaghaja         ###   ########.fr       */
+/*   Updated: 2026/03/29 23:53:20 by afaghaja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	indexavorel(t_list **a)
-{
-	t_list	*tmp1;
-	t_list	*tmp2;
-	int		val;
-	int		count;
-
-	tmp1 = *a;
-	while (tmp1)
-	{
-		tmp2 = *a;
-		count = 0;
-		val = tmp1->num;
-		while (tmp2)
-		{
-			if (val > tmp2->num)
-			{
-				count++;
-			}
-			tmp2 = tmp2->next;
-		}
-		tmp1->index = count;
-		tmp1 = tmp1->next;
-	}
-}
 
 int	chunk_size(t_list **a)
 {
@@ -53,21 +28,29 @@ int	chunk_size(t_list **a)
 void	push_chunk(t_list **a, t_list **b, int size, t_oper *opers)
 {
 	int	limit;
-	int pushed;
+	int	pushed;
+	int	j;
 
 	limit = size;
 	pushed = 0;
-	while (*a)
+	while (*a) 
 	{
-		if ((*a)->index < limit)
+		j = ft_lstsize(*a); 
+		while (j-- > 0 && *a)
 		{
-			pb(b, a, opers);
-			pushed++;
-			if (pushed == limit)
-				limit += size;
+			if ((*a)->index < limit)
+			{
+				pb(b, a, opers);
+				if ((*b)->index < limit - (size / 2))
+        			rb(b, opers);
+				pushed++;
+				if (pushed >= limit)
+					limit += size;
+			}
+			else
+				ra(a, opers);
 		}
-		else
-			ra(a, opers);
+		limit += size; 
 	}
 }
 
