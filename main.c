@@ -6,7 +6,7 @@
 /*   By: afaghaja <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/21 00:52:44 by lyov              #+#    #+#             */
-/*   Updated: 2026/03/30 00:14:53 by afaghaja         ###   ########.fr       */
+/*   Updated: 2026/03/30 00:42:32 by afaghaja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,193 +34,77 @@ void	valueing(t_bench *count, t_oper *opers, t_list **a, t_list **b)
 	*b = NULL;
 }
 
-int	bench_pars(char **argv, t_bench *count, int argc)
-{
-	int	i;
-
-	i = 0;
-	while (++i <= 2 && i < argc)
-	{
-		if (ft_strncmp(argv[i], "--simple", 9) == 0)
-			(count->simple)++;
-		else if (ft_strncmp(argv[i], "--medium", 9) == 0)
-			(count->medium)++;
-		else if (ft_strncmp(argv[i], "--complex", 10) == 0)
-			(count->complex)++;
-		else if (ft_strncmp(argv[i], "--adaptive", 11) == 0)
-			(count->adaptive)++;
-		else if (ft_strncmp(argv[i], "--bench", 8) == 0)
-			(count->bench)++;
-		if (!(count->simple + count->medium + count->complex + count->adaptive
-				+ count->bench))
-			return (0);
-	}
-	if (count->simple + count->medium + count->complex + count->adaptive == 2
-		|| count->bench == 2)
-		return (-1);
-	if (count->simple + count->medium + count->complex + count->adaptive
-		+ count->bench == 2)
-		return (2);
-	return (1);
-}
-
-int	method(t_bench *count)
-{
-	int	alg;
-
-	alg = 0;
-	if (count->bench == 1)
-		alg = 10;
-	if (count->simple == 1)
-		alg += 1;
-	else if (count->medium == 1)
-		alg += 2;
-	else if (count->complex == 1)
-		alg += 3;
-	else if (count->adaptive == 1)
-		alg += 4;
-	return (alg);
-}
-
-int	start_point(int pars, t_list **a, t_list **b)
-{
-	int	i;
-
-	i = 0;
-	if (pars == -1)
-	{
-		ft_lstclear(a, NULL);
-		ft_lstclear(b, NULL);
-		cleaning();
-	}
-	else if (pars == 0)
-		i = 1;
-	else if (pars == 1)
-		i = 2;
-	else if (pars == 2)
-		i = 3;
-	return (i);
-}
-
-void	start_sort(t_list **a, t_list **b, int alg, t_oper *opers)
-{
-	if (alg == 1 || alg == 11)
-		basic(a, b, opers);
-	else if (alg == 2 || alg == 12)
-		chunk(a, b, opers);
-	else if (alg == 3 || alg == 13)
-		radix(a, b, opers);
-}
-
-void	putnbr(int total)
-{
-	char	c;
-
-	if (total >= 10)
-		putnbr(total / 10);
-	c = (total % 10) + '0';
-	write(2, &c, 1);
-}
-
 void	write_t_oper(t_oper *opers)
 {
-	write(2, "sa: ", 4);
-	putnbr(opers->sa);
-	write(2, " ", 1);
-	write(2, "sb: ", 4);
-	putnbr(opers->sb);
-	write(2, " ", 1);
-	write(2, "ss: ", 4);
-	putnbr(opers->ss);
-	write(2, " ", 1);
-	write(2, "pa: ", 4);
-	putnbr(opers->pa);
-	write(2, " ", 1);
+	ft_printf("[bench] sa: %d sb: %d ss: %d pa: %d pb: %d\n",
+		opers->sa, opers->sb, opers->ss, opers->pa, opers->pb);
+	ft_printf("[bench] ra: %d rb: %d rr: %d rra: %d rrb: %d rrr: %d\n",
+		opers->ra, opers->rb, opers->rr, opers->rra, opers->rrb, opers->rrr);
 }
 
-void	isbench(int alg, t_oper *opers, int number)
+void	isbench(int alg, t_oper *opers, int number, float dis)
 {
 	int		total;
-	char	*s1;
+	int rem;
+	char *s1;
 	char	*s2;
 
 	if (alg < 10)
 		return ;
 	total = opers->pa + opers->pb + opers->ra + opers->rb + opers->rra
 		+ opers->rrb + opers->rrr + opers->sa;
-	write(2, "disorder: ", 10);
-	s1 = ft_itoa(number);
-	s2 = ft_itoa(return_rem(number));
-	write(2, s1, ft_strlen(s1));
-	write(2, ".", 1);
-	write(2, s2, ft_strlen(s2));
-	write(2, "\n", 1);
+	s1 = ft_itoa((int)dis);
+	rem = return_rem(dis);
+	s2 = ft_itoa(rem);
+	if (rem < 10)
+		ft_printf("[bench] disorder: %s.0%s%%\n", s1, s2);
+	else
+		ft_printf("[bench] disorder: %s.%s%%\n", s1, s2);
 	free(s1);
 	free(s2);
-	write(2, "strategy: ", 11);
-	if (number == 1)
-		write(2, "Simple / O(n^2)\n", 16);
-	else if (number == 2)
-		write(2, "Medium / O(n√n)\n", 16);
-	else if (number == 3)
-		write(2, "Complex / O(nlogn)\n", 19);
-	write(2, "total_ops: ", 12);
-	putnbr(total);
-	write(2, "\n", 1);
+	ft_printf("[bench] strategy: ");
+	if (number == 11)
+		ft_printf("Simple / O(n^2)\n");
+	else if (number == 12)
+		ft_printf("Medium / O(n√n)\n");
+	else if (number == 13)
+		ft_printf("Complex / O(nlogn)\n");
+	ft_printf("[bench] total_ops: %d\n", total);
 	write_t_oper(opers);
 }
 
-void print_list(t_list *a)
+int	adaptive_check(int alg)
 {
-    t_list *current = a;
-    while (current)
-    {
-        printf("%d ", current->num);
-        current = current->next;
-    }
-    printf("\n");
+	if (alg == 4 || alg == 14
+		|| alg == 0 || alg == 10)
+		return (1);
+	return (0);
 }
 
 int	main(int argc, char **argv)
 {
-	t_list	*a;
-	t_list	*b;
-	t_bench	count;
-	t_oper	opers;
-	int		alg;
-	int		pars;
-	int		i;
-	int		size;
-	int		strat;
+	t_vals	*vals;
 
 	if (argc < 2)
 		return (0);
-	valueing(&count, &opers, &a, &b);
-	pars = bench_pars(argv, &count, argc);
-	i = start_point(pars, &a, &b);
-	alg = method(&count);
-	a = lists(parsing(fill(argv, i), &size), &size);
-	// printf("size = %d\n", size);
-	// printf("i = %d\n", i);
-	// printf("listeri tvery: ");
-	// print_list(a);
-	// printf("disordery: %f\n", disorder(&a));
-	if (disorder(&a))
+	vals = malloc(sizeof(t_vals));
+	if (!vals)
+		cleaning();
+	valueing(&vals->count, &vals->opers, &vals->a, &vals->b);
+	vals->pars = bench_pars(argv, &vals->count, argc);
+	vals->i = start_point(vals->pars, &vals->a, &vals->b);
+	vals->alg = method(&vals->count);
+	vals->a = lists(parsing(fill(argv, vals->i), &vals->size), &vals->size);
+	if (disorder(&vals->a))
 	{
-		if (alg == 4 || alg == 14 || alg == 0 || alg == 10)
-			strat = custom(disorder(&a), &a, &b, &opers);
-		start_sort(&a, &b, alg, &opers);
-		if (alg == 4 || alg == 14 || alg == 0 || alg == 10)
-			isbench(alg, &opers, strat);
+		if (adaptive_check(vals->alg))
+			vals->strat = custom(disorder(&vals->a),
+					&vals->a, &vals->b, &vals->opers);
+		start_sort(&vals->a, &vals->b, vals->alg, &vals->opers);
+		if (adaptive_check(vals->alg))
+			isbench(vals->alg, &vals->opers, vals->strat, disorder(&vals->a));
 		else
-			isbench(alg, &opers, alg);
+			isbench(vals->alg, &vals->opers, vals->alg, disorder(&vals->a));
 	}
-	t_list *tmp = a;
-    while(tmp)
-    {
-       printf("%d\n", tmp->num);
-       tmp = tmp->next;
-    }
-	ft_lstclear(&a, NULL);
-	ft_lstclear(&b, NULL);
+	last_clean(&vals->a, &vals->b, vals);
 }
