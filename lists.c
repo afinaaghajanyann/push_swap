@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   lists.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afaghaja <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: larevsha <larevsha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 13:29:44 by lyov              #+#    #+#             */
-/*   Updated: 2026/03/29 19:59:10 by afaghaja         ###   ########.fr       */
+/*   Updated: 2026/03/30 16:21:04 by larevsha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_list	*lists(int *arr, int *size)
+t_list	*lists(int *arr, int *size, t_vals *vals)
 {
 	int		i;
 	t_list	*new;
@@ -27,7 +27,7 @@ t_list	*lists(int *arr, int *size)
 		{
 			free(arr);
 			ft_lstclear(&list, NULL);
-			cleaning();
+			cleaning(vals);
 		}
 		ft_lstadd_back(&list, new);
 		i++;

@@ -6,13 +6,13 @@
 /*   By: afaghaja <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 14:42:19 by afaghaja          #+#    #+#             */
-/*   Updated: 2026/03/27 15:55:23 by afaghaja         ###   ########.fr       */
+/*   Updated: 2026/03/31 21:15:19 by afaghaja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	rra(t_list **a, t_oper *opers)
+void	rra(t_list **a, t_oper *opers, int n)
 {
 	t_list	*last;
 	t_list	*prev;
@@ -26,12 +26,14 @@ void	rra(t_list **a, t_oper *opers)
 	prev->next = NULL;
 	last->next = *a;
 	*a = last;
-	write(1, "rra", 3);
-	write(1, "\n", 1);
-	opers->rra++;
+	if (!n)
+	{
+		write(1, "rra\n", 4);
+		opers->rra++;
+	}
 }
 
-void	rrb(t_list **a, t_oper *opers)
+void	rrb(t_list **a, t_oper *opers, int n)
 {
 	t_list	*last;
 	t_list	*prev;
@@ -45,36 +47,20 @@ void	rrb(t_list **a, t_oper *opers)
 	prev->next = NULL;
 	last->next = *a;
 	*a = last;
-	write(1, "rrb", 3);
-	write(1, "\n", 1);
-	opers->rrb++;
+	if (!n)
+	{
+		write(1, "rrb\n", 4);
+		opers->rrb++;
+	}
 }
 
-void	rrr(t_list **a, t_list **b, t_oper *opers)
+void	rrr(t_list **a, t_list **b, t_oper *opers, int n)
 {
-	t_list	*last;
-	t_list	*prev;
-	t_list	*last2;
-	t_list	*prev2;
-
-	if (!a || !*a || !(*a)->next)
-		return ;
-	prev = *a;
-	last = ft_lstlast(*a);
-	while ((prev->next)->next != NULL)
-		prev = prev->next;
-	prev->next = NULL;
-	last->next = *a;
-	*a = last;
-	if (!b || !*b || !(*b)->next)
-		return ;
-	prev2 = *b;
-	last2 = ft_lstlast(*b);
-	while ((prev2->next)->next != NULL)
-		prev2 = prev2->next;
-	prev2->next = NULL;
-	last2->next = *b;
-	*b = last2;
-	write(1, "rrr\n", 4);
-	opers->rrr++;
+	rra(a, opers, 1);
+	rrb(b, opers, 1);
+	if (!n)
+	{
+		write(1, "rrr\n", 4);
+		opers->rrr++;
+	}
 }

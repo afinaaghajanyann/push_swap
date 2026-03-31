@@ -6,12 +6,11 @@
 /*   By: afaghaja <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/18 17:54:15 by afaghaja          #+#    #+#             */
-/*   Updated: 2026/03/29 23:53:20 by afaghaja         ###   ########.fr       */
+/*   Updated: 2026/03/31 16:12:49 by afaghaja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
 
 int	chunk_size(t_list **a)
 {
@@ -33,24 +32,24 @@ void	push_chunk(t_list **a, t_list **b, int size, t_oper *opers)
 
 	limit = size;
 	pushed = 0;
-	while (*a) 
+	while (*a)
 	{
-		j = ft_lstsize(*a); 
+		j = ft_lstsize(*a);
 		while (j-- > 0 && *a)
 		{
 			if ((*a)->index < limit)
 			{
-				pb(b, a, opers);
+				pb(b, a, opers, 0);
 				if ((*b)->index < limit - (size / 2))
-        			rb(b, opers);
+					rb(b, opers, 0);
 				pushed++;
 				if (pushed >= limit)
 					limit += size;
 			}
 			else
-				ra(a, opers);
+				ra(a, opers, 0);
 		}
-		limit += size; 
+		limit += size;
 	}
 }
 
@@ -64,6 +63,6 @@ void	chunk(t_list **a, t_list **b, t_oper *opers)
 	while (*b)
 	{
 		find_max(b, opers);
-		pa(a, b, opers);
+		pa(a, b, opers, 0);
 	}
 }

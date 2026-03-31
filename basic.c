@@ -6,44 +6,18 @@
 /*   By: afaghaja <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 18:37:35 by afaghaja          #+#    #+#             */
-/*   Updated: 2026/03/29 23:29:57 by afaghaja         ###   ########.fr       */
+/*   Updated: 2026/03/31 16:12:04 by afaghaja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	indexavorel(t_list **a)
-{
-	t_list	*tmp1;
-	t_list	*tmp2;
-	int		val;
-	int		count;
-
-	tmp1 = *a;
-	while (tmp1)
-	{
-		tmp2 = *a;
-		count = 0;
-		val = tmp1->num;
-		while (tmp2)
-		{
-			if (val > tmp2->num)
-			{
-				count++;
-			}
-			tmp2 = tmp2->next;
-		}
-		tmp1->index = count;
-		tmp1 = tmp1->next;
-	}
-}
-
 int	find_the_element(t_list **b, int v)
 {
 	int		count;
-	int closest;
-	int j;
-	t_list *temp;
+	int		closest;
+	int		j;
+	t_list	*temp;
 
 	temp = *b;
 	count = 0;
@@ -51,17 +25,16 @@ int	find_the_element(t_list **b, int v)
 	closest = -1;
 	while (temp)
 	{
-   		if (temp->index < v && temp->index > closest) 
-   		{
-        	closest = temp->index;
-        	count = j;
-    	}
-    	temp = temp->next;
-    	j++;
+		if (temp->index < v && temp->index > closest)
+		{
+			closest = temp->index;
+			count = j;
+		}
+		temp = temp->next;
+		j++;
 	}
 	if (closest == -1)
 		count = -1;
-
 	return (count);
 }
 
@@ -74,7 +47,7 @@ void	rotate(t_list **b, int count, t_oper *opers)
 	{
 		while (count > 0)
 		{
-			rb(b, opers);
+			rb(b, opers, 0);
 			count--;
 		}
 	}
@@ -83,7 +56,7 @@ void	rotate(t_list **b, int count, t_oper *opers)
 		count = size - count;
 		while (count > 0)
 		{
-			rrb(b, opers);
+			rrb(b, opers, 0);
 			count--;
 		}
 	}
@@ -97,8 +70,7 @@ void	find_max(t_list **b, t_oper *opers)
 	int		count;
 
 	if (!b || !*b)
-		return;
-
+		return ;
 	tmp_l = *b;
 	max = tmp_l->index;
 	pos = 0;
@@ -116,11 +88,37 @@ void	find_max(t_list **b, t_oper *opers)
 	rotate(b, pos, opers);
 }
 
+void	find_min(t_list **b, t_oper *opers)
+{
+	t_list	*tmp_l;
+	int		min;
+	int		pos;
+	int		count;
+
+	if (!b || !*b)
+		return ;
+	tmp_l = *b;
+	min = tmp_l->num;
+	pos = 0;
+	count = 0;
+	while (tmp_l)
+	{
+		if (tmp_l->num < min)
+		{
+			min = tmp_l->num;
+			pos = count;
+		}
+		count++;
+		tmp_l = tmp_l->next;
+	}
+	rotate(b, pos, opers);
+}
+
 void	basic(t_list **a, t_list **b, t_oper *opers)
 {
 	int		ind;
 	int		size;
-	t_list *temp;
+	t_list	*temp;
 
 	indexavorel(a);
 	while (*a)
@@ -135,9 +133,9 @@ void	basic(t_list **a, t_list **b, t_oper *opers)
 			else
 				rotate(b, ind, opers);
 		}
-		pb(b, a, opers);
+		pb(b, a, opers, 0);
 	}
 	find_max(b, opers);
 	while (*b)
-		pa(a, b, opers);
+		pa(a, b, opers, 0);
 }

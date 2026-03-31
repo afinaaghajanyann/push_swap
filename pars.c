@@ -6,7 +6,7 @@
 /*   By: afaghaja <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/07 16:48:11 by afaghaja          #+#    #+#             */
-/*   Updated: 2026/03/29 19:46:17 by afaghaja         ###   ########.fr       */
+/*   Updated: 2026/03/31 15:38:44 by afaghaja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@ int	isvalid(char *str)
 	return (1);
 }
 
-int is_repetetive(char **str)
+int	is_repetetive(char **str, char *array, int *arr, char **splitted_arr)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
 	j = 0;
@@ -42,7 +42,8 @@ int is_repetetive(char **str)
 		j = i + 1;
 		while (str[j])
 		{
-			if (ft_strcmp(str[i], str[j]) == 0)
+			if (ft_atoi(str[i], array, arr, splitted_arr)
+				== ft_atoi(str[j], array, arr, splitted_arr))
 				return (0);
 			j++;
 		}
@@ -51,75 +52,45 @@ int is_repetetive(char **str)
 	return (1);
 }
 
-int	*parsing(char *array, int *size)
+void	ankap(int *size, char **splitted_arr, t_vals *vals, char *array)
+{
+	int			i;
+	long long	val;
+
+	i = 0;
+	while (i < *size)
+	{
+		val = ft_atoi(splitted_arr[i], NULL, NULL, NULL);
+		if (val < -2147483648LL || val > 2147483647LL)
+			pars_free(array, NULL, splitted_arr, vals);
+		i++;
+	}
+}
+
+int	*parsing(char *array, int *size, t_vals *vals)
 {
 	int		*arr;
 	int		i;
 	char	**splitted_arr;
 
-	*size = 0;
-	arr = malloc(sizeof(int) * (ft_strlen(array)));
-	if (!arr)
-	{
-		free(array);
-		cleaning();
-	}
-	
 	splitted_arr = ft_split(array, ' ');
+	if (!splitted_arr)
+		pars_free(array, NULL, NULL, vals);
+	*size = 0;
 	while (splitted_arr[*size])
 		(*size)++;
-	i = 0;
-	while (splitted_arr[i])
+	ankap(size, splitted_arr, vals, array);
+	arr = malloc(sizeof(int) * (*size));
+	if (!arr)
+		pars_free(array, NULL, splitted_arr, vals);
+	i = -1;
+	while (splitted_arr[++i])
 	{
-		if (!isvalid(splitted_arr[i]) || !is_repetetive(splitted_arr))
-			pars_free(array, arr, splitted_arr);
-		arr[i] = ft_atoi(splitted_arr[i], array, arr, splitted_arr);
-		i++;
+		if (!isvalid(splitted_arr[i])
+			|| !is_repetetive(splitted_arr, array, arr, splitted_arr))
+			pars_free(array, arr, splitted_arr, vals);
+		arr[i] = (int)ft_atoi(splitted_arr[i], NULL, NULL, NULL);
 	}
-	free(splitted_arr);
 	free(array);
-	return (arr);
+	return (clean_splitted_arr(splitted_arr), arr);
 }
-
-// #include "push_swap.h"
-// #include <stdio.h>
-
-// int	count_words(char *str)
-// {
-// 	int	i;
-// 	int	count;
-
-// 	i = 0;
-// 	count = 0;
-// 	while (str[i])
-// 	{
-// 		while (str[i] == ' ')
-// 			i++;
-// 		if (str[i])
-// 			count++;
-// 		while (str[i] && str[i] != ' ')
-// 			i++;
-// 	}
-// 	return (count);
-// }
-
-// int	main(int argc, char **argv)
-// {
-// 	int arr[100];
-// 	int size;
-// 	int i;
-
-// 	if (argc < 2)
-// 		return (0);
-
-// 	pars(argc, argv, arr);
-
-// 	size = count_words(argv[argc - 1]);
-
-// 	i = 0;
-// 	while (i < size)
-// 	{
-// 		printf("%d\n", arr[i]);
-// 		i++;
-// 	}
-// }

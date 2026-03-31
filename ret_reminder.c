@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ret_reminder.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afaghaja <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lyov <lyov@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/26 19:23:05 by afaghaja          #+#    #+#             */
-/*   Updated: 2026/03/30 00:10:19 by afaghaja         ###   ########.fr       */
+/*   Updated: 2026/03/30 01:36:32 by lyov             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int	return_rem(float n)
 {
-	int i;
-	float rem;
+	int		i;
+	float	rem;
 
 	i = n;
 	rem = n - i;

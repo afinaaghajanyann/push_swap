@@ -6,7 +6,7 @@
 /*   By: afaghaja <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/21 00:52:44 by lyov              #+#    #+#             */
-/*   Updated: 2026/03/30 00:42:32 by afaghaja         ###   ########.fr       */
+/*   Updated: 2026/03/31 20:40:52 by afaghaja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,15 @@ void	valueing(t_bench *count, t_oper *opers, t_list **a, t_list **b)
 	*b = NULL;
 }
 
-void	write_t_oper(t_oper *opers)
+void	write_t_oper(t_oper *opers, int number, int total)
 {
+	if (number == 11)
+		ft_printf("Simple / O(n^2)\n");
+	else if (number == 12)
+		ft_printf("Medium / O(n√n)\n");
+	else if (number == 13)
+		ft_printf("Complex / O(nlogn)\n");
+	ft_printf("[bench] total_ops: %d\n", total);
 	ft_printf("[bench] sa: %d sb: %d ss: %d pa: %d pb: %d\n",
 		opers->sa, opers->sb, opers->ss, opers->pa, opers->pb);
 	ft_printf("[bench] ra: %d rb: %d rr: %d rra: %d rrb: %d rrr: %d\n",
@@ -45,8 +52,8 @@ void	write_t_oper(t_oper *opers)
 void	isbench(int alg, t_oper *opers, int number, float dis)
 {
 	int		total;
-	int rem;
-	char *s1;
+	int		rem;
+	char	*s1;
 	char	*s2;
 
 	if (alg < 10)
@@ -63,14 +70,7 @@ void	isbench(int alg, t_oper *opers, int number, float dis)
 	free(s1);
 	free(s2);
 	ft_printf("[bench] strategy: ");
-	if (number == 11)
-		ft_printf("Simple / O(n^2)\n");
-	else if (number == 12)
-		ft_printf("Medium / O(n√n)\n");
-	else if (number == 13)
-		ft_printf("Complex / O(nlogn)\n");
-	ft_printf("[bench] total_ops: %d\n", total);
-	write_t_oper(opers);
+	write_t_oper(opers, number, total);
 }
 
 int	adaptive_check(int alg)
@@ -83,28 +83,29 @@ int	adaptive_check(int alg)
 
 int	main(int argc, char **argv)
 {
-	t_vals	*vals;
+	t_vals	*v;
 
 	if (argc < 2)
 		return (0);
-	vals = malloc(sizeof(t_vals));
-	if (!vals)
-		cleaning();
-	valueing(&vals->count, &vals->opers, &vals->a, &vals->b);
-	vals->pars = bench_pars(argv, &vals->count, argc);
-	vals->i = start_point(vals->pars, &vals->a, &vals->b);
-	vals->alg = method(&vals->count);
-	vals->a = lists(parsing(fill(argv, vals->i), &vals->size), &vals->size);
-	if (disorder(&vals->a))
+	v = malloc(sizeof(t_vals));
+	if (!v)
+		cleaning(v);
+	valueing(&v->count, &v->opers, &v->a, &v->b);
+	v->pars = bench_pars(argv, &v->count, argc);
+	v->i = start_point(v->pars, &v->a, &v->b, v);
+	v->alg = method(&v->count);
+	v->a = lists(parsing(fill(argv, v->i, v), &v->size, v), &v->size, v);
+	v->dis = disorder(&v->a);
+	if (disorder(&v->a))
 	{
-		if (adaptive_check(vals->alg))
-			vals->strat = custom(disorder(&vals->a),
-					&vals->a, &vals->b, &vals->opers);
-		start_sort(&vals->a, &vals->b, vals->alg, &vals->opers);
-		if (adaptive_check(vals->alg))
-			isbench(vals->alg, &vals->opers, vals->strat, disorder(&vals->a));
-		else
-			isbench(vals->alg, &vals->opers, vals->alg, disorder(&vals->a));
+		if (adaptive_check(v->alg))
+			v->strat = custom(disorder(&v->a),
+					&v->a, &v->b, &v->opers);
+		start_sort(&v->a, &v->b, v->alg, &v->opers);
 	}
-	last_clean(&vals->a, &vals->b, vals);
+	if (adaptive_check(v->alg))
+		isbench(v->alg, &v->opers, v->strat, (v->dis) * 100);
+	else
+		isbench(v->alg, &v->opers, v->alg, (v->dis) * 100);
+	return (last_clean(&v->a, &v->b, v), 0);
 }

@@ -6,13 +6,13 @@
 /*   By: afaghaja <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 14:43:36 by afaghaja          #+#    #+#             */
-/*   Updated: 2026/03/27 15:52:52 by afaghaja         ###   ########.fr       */
+/*   Updated: 2026/03/31 21:16:55 by afaghaja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	sa(t_list **a, t_oper *opers)
+void	sa(t_list **a, t_oper *opers, int n)
 {
 	t_list	*temp;
 
@@ -22,12 +22,14 @@ void	sa(t_list **a, t_oper *opers)
 	*a = (*a)->next;
 	temp->next = (*a)->next;
 	(*a)->next = temp;
-	write(1, "sa", 2);
-	write(1, "\n", 1);
-	opers->sa++;
+	if (!n)
+	{
+		write(1, "sa\n", 3);
+		opers->sa++;
+	}
 }
 
-void	sb(t_list **a, t_oper *opers)
+void	sb(t_list **a, t_oper *opers, int n)
 {
 	t_list	*temp;
 
@@ -37,12 +39,14 @@ void	sb(t_list **a, t_oper *opers)
 	*a = (*a)->next;
 	temp->next = (*a)->next;
 	(*a)->next = temp;
-	write(1, "sb", 2);
-	write(1, "\n", 1);
-	opers->sb++;
+	if (!n)
+	{
+		write(1, "sb\n", 3);
+		opers->sb++;
+	}
 }
 
-void	ss(t_list **a, t_list **b, t_oper *opers)
+void	ss(t_list **a, t_list **b, t_oper *opers, int n)
 {
 	t_list	*temp1;
 	t_list	*temp2;
@@ -59,6 +63,9 @@ void	ss(t_list **a, t_list **b, t_oper *opers)
 	*b = (*b)->next;
 	temp2->next = (*b)->next;
 	(*b)->next = temp2;
-	write(1, "ss\n", 3);
-	opers->ss++;
+	if (!n)
+	{
+		write(1, "ss\n", 3);
+		opers->ss++;
+	}
 }
