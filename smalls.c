@@ -6,11 +6,35 @@
 /*   By: afaghaja <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 20:06:40 by larevsha          #+#    #+#             */
-/*   Updated: 2026/03/31 16:16:19 by afaghaja         ###   ########.fr       */
+/*   Updated: 2026/04/01 18:31:46 by afaghaja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+void	rotate_a(t_list **b, int count, t_oper *opers)
+{
+	int	size;
+
+	size = ft_lstsize(*b);
+	if (count < size / 2)
+	{
+		while (count > 0)
+		{
+			ra(b, opers, 0);
+			count--;
+		}
+	}
+	else
+	{
+		count = size - count;
+		while (count > 0)
+		{
+			rra(b, opers, 0);
+			count--;
+		}
+	}
+}
 
 void	three(t_list **a, t_oper *opers)
 {

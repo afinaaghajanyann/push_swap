@@ -6,7 +6,7 @@
 /*   By: afaghaja <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 14:43:36 by afaghaja          #+#    #+#             */
-/*   Updated: 2026/03/31 21:16:55 by afaghaja         ###   ########.fr       */
+/*   Updated: 2026/04/01 17:07:37 by afaghaja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,8 @@ void	sa(t_list **a, t_oper *opers, int n)
 	temp->next = (*a)->next;
 	(*a)->next = temp;
 	if (!n)
-	{
 		write(1, "sa\n", 3);
-		opers->sa++;
-	}
+	opers->sa++;
 }
 
 void	sb(t_list **a, t_oper *opers, int n)
@@ -40,10 +38,8 @@ void	sb(t_list **a, t_oper *opers, int n)
 	temp->next = (*a)->next;
 	(*a)->next = temp;
 	if (!n)
-	{
 		write(1, "sb\n", 3);
-		opers->sb++;
-	}
+	opers->sb++;
 }
 
 void	ss(t_list **a, t_list **b, t_oper *opers, int n)
@@ -64,8 +60,6 @@ void	ss(t_list **a, t_list **b, t_oper *opers, int n)
 	temp2->next = (*b)->next;
 	(*b)->next = temp2;
 	if (!n)
-	{
 		write(1, "ss\n", 3);
-		opers->ss++;
-	}
+	opers->ss++;
 }

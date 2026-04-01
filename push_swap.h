@@ -6,7 +6,7 @@
 /*   By: afaghaja <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/04 15:04:37 by afaghaja          #+#    #+#             */
-/*   Updated: 2026/03/31 16:08:38 by afaghaja         ###   ########.fr       */
+/*   Updated: 2026/04/01 18:32:11 by afaghaja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,5 +130,6 @@ int					ft_printf(const char *str, ...);
 void				last_clean(t_list **a, t_list **b, t_vals *vals);
 int					main(int argc, char **argv);
 void				isbench(int alg, t_oper *opers, int number, float dis);
+void				rotate_a(t_list **b, int count, t_oper *opers);
 
 #endif

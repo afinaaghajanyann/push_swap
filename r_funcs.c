@@ -6,7 +6,7 @@
 /*   By: afaghaja <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 14:41:12 by afaghaja          #+#    #+#             */
-/*   Updated: 2026/03/31 21:19:37 by afaghaja         ###   ########.fr       */
+/*   Updated: 2026/04/01 17:58:48 by afaghaja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,8 @@ void	ra(t_list **a, t_oper *opers, int n)
 	last->next = first;
 	first->next = NULL;
 	if (!n)
-	{
 		write(1, "ra\n", 3);
-		opers->ra++;
-	}
+	opers->ra++;
 }
 
 void	rb(t_list **a, t_oper *opers, int n)
@@ -44,10 +42,8 @@ void	rb(t_list **a, t_oper *opers, int n)
 	last->next = first;
 	first->next = NULL;
 	if (!n)
-	{
 		write(1, "rb\n", 3);
-		opers->rb++;
-	}
+	opers->rb++;
 }
 
 void	rr(t_list **a, t_list **b, t_oper *opers, int n)
@@ -72,8 +68,6 @@ void	rr(t_list **a, t_list **b, t_oper *opers, int n)
 	last2->next = first2;
 	first2->next = NULL;
 	if (!n)
-	{
 		write(1, "rr\n", 3);
-		opers->rr++;
-	}
+	opers->rr++;
 }

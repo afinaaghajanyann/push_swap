@@ -6,7 +6,7 @@
 /*   By: afaghaja <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/21 00:52:44 by lyov              #+#    #+#             */
-/*   Updated: 2026/03/31 20:40:52 by afaghaja         ###   ########.fr       */
+/*   Updated: 2026/04/01 19:12:10 by afaghaja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ void	write_t_oper(t_oper *opers, int number, int total)
 	else if (number == 13)
 		ft_printf("Complex / O(nlogn)\n");
 	ft_printf("[bench] total_ops: %d\n", total);
-	ft_printf("[bench] sa: %d sb: %d ss: %d pa: %d pb: %d\n",
-		opers->sa, opers->sb, opers->ss, opers->pa, opers->pb);
+	ft_printf("[bench] sa: %d sb: %d ss: %d pa: %d pb: %d\n", opers->sa,
+		opers->sb, opers->ss, opers->pa, opers->pb);
 	ft_printf("[bench] ra: %d rb: %d rr: %d rra: %d rrb: %d rrr: %d\n",
 		opers->ra, opers->rb, opers->rr, opers->rra, opers->rrb, opers->rrr);
 }
@@ -75,8 +75,7 @@ void	isbench(int alg, t_oper *opers, int number, float dis)
 
 int	adaptive_check(int alg)
 {
-	if (alg == 4 || alg == 14
-		|| alg == 0 || alg == 10)
+	if (alg == 4 || alg == 14 || alg == 0 || alg == 10)
 		return (1);
 	return (0);
 }
@@ -99,8 +98,7 @@ int	main(int argc, char **argv)
 	if (disorder(&v->a))
 	{
 		if (adaptive_check(v->alg))
-			v->strat = custom(disorder(&v->a),
-					&v->a, &v->b, &v->opers);
+			v->strat = custom(disorder(&v->a), &v->a, &v->b, &v->opers);
 		start_sort(&v->a, &v->b, v->alg, &v->opers);
 	}
 	if (adaptive_check(v->alg))

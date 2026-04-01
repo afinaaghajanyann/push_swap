@@ -11,7 +11,12 @@ SRCS = 	basic.c		ft_itoa.c	lists.c	p_funcs.c	ret_reminder.c \
 		counts.c	counts1.c	ft_printf.c
 
 BONUS_SRCS = checker.c get_next_line.c get_next_line_utils.c \
-			 checker_opers.c 
+			 checker_opers.c \
+			basic.c		ft_itoa.c	lists.c	p_funcs.c	ret_reminder.c \
+		    chunk.c		ft_split.c	r_funcs.c \
+			custom.c	helper1.c	rr_funcs.c		helper3.c	main_funcs1.c\
+			fill_arr.c	helper2.c	pars.c		radix.c	s_funcs.c	cleaning.c	smalls.c\
+			counts.c	counts1.c	ft_printf.c
 
 OBJS = $(SRCS:.c=.o)
 

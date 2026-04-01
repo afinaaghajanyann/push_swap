@@ -6,7 +6,7 @@
 /*   By: afaghaja <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 18:37:35 by afaghaja          #+#    #+#             */
-/*   Updated: 2026/03/31 16:12:04 by afaghaja         ###   ########.fr       */
+/*   Updated: 2026/04/01 18:32:22 by afaghaja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ void	find_min(t_list **b, t_oper *opers)
 		count++;
 		tmp_l = tmp_l->next;
 	}
-	rotate(b, pos, opers);
+	rotate_a(b, pos, opers);
 }
 
 void	basic(t_list **a, t_list **b, t_oper *opers)
